@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+
+  --color-canvas: #f3eee6;
+  --color-paper: #fffdf8;
+  --color-ink: #1c1915;
+  --color-muted: #6e665c;
+  --color-line: #e4dacd;
+  --color-forest: #1e4a38;
+  --color-forest-deep: #132e24;
+  --color-foam: #e6efe8;
+  --color-copper: #9c4314;
+  --color-copper-soft: #f6e4d6;
+
+  --shadow-border: 0px 0px 0px 1px rgb(28 25 21 / 0.06), 0px 1px 2px -1px rgb(28 25 21 / 0.06),
+    0px 2px 4px 0px rgb(28 25 21 / 0.04);
+  --shadow-lift: 0px 0px 0px 1px rgb(28 25 21 / 0.08), 0px 14px 34px -18px rgb(28 25 21 / 0.35);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    line-height: 1.5;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-foam);
+    color: var(--color-ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Tailwind's sr-only uses nowrap text that still widens the document. */
+.sr-only {
+  transform: scale(0);
+}
+
+

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Juniper">
+  <rect width="32" height="32" rx="8" fill="#1E4A38"/>
+  <path d="M16 6.2v6.2" stroke="#F3EEE6" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M16 9.2 11.2 12.2M16 9.2 20.8 12.2" stroke="#F3EEE6" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="16" cy="17.2" r="3.35" fill="#F3EEE6"/>
+  <circle cx="11.15" cy="23.35" r="3.15" fill="#A34716"/>
+  <circle cx="20.85" cy="23.35" r="3.15" fill="#F3EEE6"/>
+</svg>
