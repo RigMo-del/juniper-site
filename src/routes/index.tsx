@@ -56,7 +56,7 @@ function Home() {
               <span>
                 <span className="block text-sm text-muted">From the table</span>
                 <span className="block font-medium">{kettle.name}</span>
-                <span className="block text-sm tabular-nums">{money(kettle.price)}</span>
+                <span className="block text-sm tabular-nums">{money(kettle.samplePrice)}</span>
               </span>
             </Link>
           ) : null}
@@ -67,12 +67,12 @@ function Home() {
         <li>
           <p className="font-display text-2xl">01</p>
           <h2 className="mt-2 font-sans text-base font-medium tracking-normal">Paste a tag</h2>
-          <p className="mt-1 text-sm text-muted">Any partner ID. It stays in this browser and rides on every outbound link.</p>
+          <p className="mt-1 text-sm text-muted">Owner affiliate tag is fixed. Visitors cannot override attribution.</p>
         </li>
         <li>
           <p className="font-display text-2xl">02</p>
           <h2 className="mt-2 font-sans text-base font-medium tracking-normal">Share or shop</h2>
-          <p className="mt-1 text-sm text-muted">Send a product link, or open the partner yourself. Both count as a click.</p>
+          <p className="mt-1 text-sm text-muted">Demonstration products are labeled and not purchasable until verified retailer links are added.</p>
         </li>
         <li>
           <p className="font-display text-2xl">03</p>

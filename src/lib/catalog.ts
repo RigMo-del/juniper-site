@@ -18,15 +18,54 @@ export const sorts = [
 
 export type SortId = (typeof sorts)[number]["id"];
 
+/** Retailer with verified affiliate attribution support. */
+export type Retailer = {
+  id: string;
+  name: string;
+  /** Verified base product or search URL. Only present when verified. */
+  verifiedBaseUrl?: string;
+  /** Query param name used for affiliate tag (e.g. "tag", "ref", "aff"). */
+  affiliateParam?: string;
+  verified: boolean;
+};
+
+export const retailers: Retailer[] = [
+  // Placeholder structure. Real verified URLs and params must be added by the owner
+  // after confirming affiliate program membership and link formats.
+  // Do not invent retailer URLs or tags.
+  {
+    id: "northline",
+    name: "Northline",
+    verified: false,
+  },
+  {
+    id: "lumen-supply",
+    name: "Lumen Supply",
+    verified: false,
+  },
+  {
+    id: "harbor-co",
+    name: "Harbor & Co.",
+    verified: false,
+  },
+  {
+    id: "field-pine",
+    name: "Field & Pine",
+    verified: false,
+  },
+];
+
 export type Product = {
   id: string;
   name: string;
   department: DeptSlug;
-  price: number;
-  compareAt?: number;
-  rating: number;
-  reviews: number;
-  partner: string;
+  /** Sample price for demonstration only. Not a real offer. */
+  samplePrice: number;
+  sampleCompareAt?: number;
+  /** Sample rating for demonstration only. */
+  sampleRating?: number;
+  sampleReviews?: number;
+  retailerId: string;
   image: string;
   featured?: boolean;
   tags: string[];
@@ -34,7 +73,11 @@ export type Product = {
   why: string;
   highlights: string[];
   specs: [string, string][];
-  quote: { by: string; text: string };
+  /** Sample testimonial for demonstration only. */
+  sampleQuote?: { by: string; text: string };
+  /** True for all current catalog items. Not purchasable until verified. */
+  isDemonstration: true;
+  verified: false;
 };
 
 export const products: Product[] = [
@@ -42,11 +85,11 @@ export const products: Product[] = [
     id: "nimbus",
     name: "Nimbus Closed Cups",
     department: "sound",
-    price: 129,
-    compareAt: 189,
-    rating: 4.6,
-    reviews: 1840,
-    partner: "Northline",
+    samplePrice: 129,
+    sampleCompareAt: 189,
+    sampleRating: 4.6,
+    sampleReviews: 1840,
+    retailerId: "northline",
     image: "/products/nimbus.jpg",
     featured: true,
     tags: ["headphones", "anc", "audio", "wireless"],
@@ -58,17 +101,19 @@ export const products: Product[] = [
       ["Battery", "32 hours"],
       ["Finish", "Matte sage"],
     ],
-    quote: { by: "Elena V.", text: "I wore them through a delayed red-eye and forgot they were on. That is the review." },
+    sampleQuote: { by: "Elena V.", text: "I wore them through a delayed red-eye and forgot they were on. That is the review." },
+    isDemonstration: true,
+    verified: false,
   },
   {
     id: "drift",
     name: "Drift Open Case",
     department: "sound",
-    price: 79,
-    compareAt: 99,
-    rating: 4.4,
-    reviews: 960,
-    partner: "Lumen Supply",
+    samplePrice: 79,
+    sampleCompareAt: 99,
+    sampleRating: 4.4,
+    sampleReviews: 960,
+    retailerId: "lumen-supply",
     image: "/products/drift.jpg",
     tags: ["earbuds", "wireless", "audio"],
     blurb: "Stone-colored earbuds in a pebble case that actually stays shut in a coat pocket.",
@@ -79,17 +124,19 @@ export const products: Product[] = [
       ["Case", "Warm stone"],
       ["Charge", "USB-C"],
     ],
-    quote: { by: "Marcus L.", text: "First pair I have not lost a bud from in a year. The case is the whole trick." },
+    sampleQuote: { by: "Marcus L.", text: "First pair I have not lost a bud from in a year. The case is the whole trick." },
+    isDemonstration: true,
+    verified: false,
   },
   {
     id: "oakline",
     name: "Oakline Sixty",
     department: "sound",
-    price: 148,
-    compareAt: 180,
-    rating: 4.7,
-    reviews: 640,
-    partner: "Harbor & Co.",
+    samplePrice: 148,
+    sampleCompareAt: 180,
+    sampleRating: 4.7,
+    sampleReviews: 640,
+    retailerId: "harbor-co",
     image: "/products/oakline.jpg",
     featured: true,
     tags: ["keyboard", "mechanical", "desk"],
@@ -101,16 +148,18 @@ export const products: Product[] = [
       ["Case", "Walnut"],
       ["Switch", "Tactile, pre-lubed"],
     ],
-    quote: { by: "Priya N.", text: "It sounds like a pencil on good paper. I stopped apologizing on calls." },
+    sampleQuote: { by: "Priya N.", text: "It sounds like a pencil on good paper. I stopped apologizing on calls." },
+    isDemonstration: true,
+    verified: false,
   },
   {
     id: "halo",
     name: "Halo Brass Lamp",
     department: "light",
-    price: 84,
-    rating: 4.5,
-    reviews: 410,
-    partner: "Field & Pine",
+    samplePrice: 84,
+    sampleRating: 4.5,
+    sampleReviews: 410,
+    retailerId: "field-pine",
     image: "/products/halo.jpg",
     featured: true,
     tags: ["lamp", "desk", "brass", "light"],
@@ -122,17 +171,19 @@ export const products: Product[] = [
       ["Shade", "Oatmeal linen"],
       ["Bulb", "E12, included"],
     ],
-    quote: { by: "Jonah P.", text: "I moved it once and then never thought about it again, which is what a lamp should do." },
+    sampleQuote: { by: "Jonah P.", text: "I moved it once and then never thought about it again, which is what a lamp should do." },
+    isDemonstration: true,
+    verified: false,
   },
   {
     id: "marlowe",
     name: "Marlowe Mushroom Lamp",
     department: "light",
-    price: 96,
-    compareAt: 120,
-    rating: 4.8,
-    reviews: 722,
-    partner: "Field & Pine",
+    samplePrice: 96,
+    sampleCompareAt: 120,
+    sampleRating: 4.8,
+    sampleReviews: 722,
+    retailerId: "field-pine",
     image: "/products/marlowe.jpg",
     featured: true,
     tags: ["lamp", "ceramic", "table", "light"],
@@ -144,17 +195,19 @@ export const products: Product[] = [
       ["Glaze", "Sage"],
       ["Cord", "Cloth, 6 ft"],
     ],
-    quote: { by: "Alicia M.", text: "Guests assume I found it at an estate sale. I let them." },
+    sampleQuote: { by: "Alicia M.", text: "Guests assume I found it at an estate sale. I let them." },
+    isDemonstration: true,
+    verified: false,
   },
   {
     id: "cedar",
     name: "Cedar Stripe Throw",
     department: "light",
-    price: 58,
-    compareAt: 84,
-    rating: 4.6,
-    reviews: 1504,
-    partner: "Harbor & Co.",
+    samplePrice: 58,
+    sampleCompareAt: 84,
+    sampleRating: 4.6,
+    sampleReviews: 1504,
+    retailerId: "harbor-co",
     image: "/products/cedar.jpg",
     tags: ["blanket", "wool", "throw", "linen"],
     blurb: "A wool throw in rust and cream stripes, heavy enough to stay on a couch.",
@@ -165,16 +218,18 @@ export const products: Product[] = [
       ["Fiber", "Wool blend"],
       ["Care", "Cold wash, dry flat"],
     ],
-    quote: { by: "Chris D.", text: "It lives on the arm of the sofa and somehow never looks rumpled. Unfair, really." },
+    sampleQuote: { by: "Chris D.", text: "It lives on the arm of the sofa and somehow never looks rumpled. Unfair, really." },
+    isDemonstration: true,
+    verified: false,
   },
   {
     id: "sable",
     name: "Sable Linen Sheets",
     department: "light",
-    price: 128,
-    rating: 4.5,
-    reviews: 880,
-    partner: "Northline",
+    samplePrice: 128,
+    sampleRating: 4.5,
+    sampleReviews: 880,
+    retailerId: "northline",
     image: "/products/sable.jpg",
     featured: true,
     tags: ["sheets", "linen", "bed", "bedding"],
@@ -186,17 +241,19 @@ export const products: Product[] = [
       ["Fiber", "European linen"],
       ["Color", "Oatmeal"],
     ],
-    quote: { by: "Helen S.", text: "I stopped making the bed perfectly. The wrinkles are the point and I am at peace." },
+    sampleQuote: { by: "Helen S.", text: "I stopped making the bed perfectly. The wrinkles are the point and I am at peace." },
+    isDemonstration: true,
+    verified: false,
   },
   {
     id: "kettle",
     name: "Copper Gooseneck",
     department: "table",
-    price: 68,
-    compareAt: 92,
-    rating: 4.7,
-    reviews: 2104,
-    partner: "Lumen Supply",
+    samplePrice: 68,
+    sampleCompareAt: 92,
+    sampleRating: 4.7,
+    sampleReviews: 2104,
+    retailerId: "lumen-supply",
     image: "/products/kettle.jpg",
     featured: true,
     tags: ["kettle", "coffee", "copper", "tea"],
@@ -208,7 +265,9 @@ export const products: Product[] = [
       ["Finish", "Matte copper"],
       ["Heat", "Stovetop, all types"],
     ],
-    quote: { by: "Andre K.", text: "My pour-over stopped flooding the filter. That is a personality change for a kettle." },
+    sampleQuote: { by: "Andre K.", text: "My pour-over stopped flooding the filter. That is a personality change for a kettle." },
+    isDemonstration: true,
+    verified: false,
   },
 ];
 
@@ -220,12 +279,22 @@ export function getProduct(id: string) {
   return products.find((product) => product.id === id);
 }
 
-export function partnerHref(id: string, partner: string, tag: string) {
-  const params = new URLSearchParams({
-    tag: tag.trim() || "juniper-20",
-    partner,
-  });
-  return `https://example.com/go/${encodeURIComponent(id)}?${params.toString()}`;
+export function getRetailer(id: string) {
+  return retailers.find((r) => r.id === id);
+}
+
+/**
+ * Builds an affiliate URL only when the retailer is verified and has a base URL.
+ * Owner affiliate tag is applied via the retailer's param. Public visitors cannot override it.
+ * Returns null for demonstration / unverified products.
+ */
+export function buildAffiliateUrl(product: Product, ownerTag: string): string | null {
+  if (!product.verified || product.isDemonstration) return null;
+  const retailer = getRetailer(product.retailerId);
+  if (!retailer?.verified || !retailer.verifiedBaseUrl || !retailer.affiliateParam) return null;
+  const url = new URL(retailer.verifiedBaseUrl);
+  url.searchParams.set(retailer.affiliateParam, ownerTag.trim() || "juniper");
+  return url.toString();
 }
 
 export function inDepartment(slug: string) {
@@ -240,10 +309,11 @@ export function listProducts(opts: { q?: string; dept?: string; sort?: SortId; d
     .filter(Boolean);
   const filtered = products.filter((product) => {
     if (opts.dept && product.department !== opts.dept) return false;
-    if (opts.deals && offPercent(product.price, product.compareAt) <= 0) return false;
+    if (opts.deals && offPercent(product.samplePrice, product.sampleCompareAt) <= 0) return false;
     if (!words.length) return true;
     const dept = getDepartment(product.department);
-    const hay = [product.name, product.blurb, product.why, product.partner, dept?.name ?? "", ...product.tags, ...product.highlights]
+    const retailer = getRetailer(product.retailerId);
+    const hay = [product.name, product.blurb, product.why, retailer?.name ?? "", dept?.name ?? "", ...product.tags, ...product.highlights]
       .join(" ")
       .toLowerCase();
     return words.every((word) => hay.includes(word));
@@ -255,23 +325,23 @@ function sortProducts(list: Product[], sort: SortId) {
   const copy = [...list];
   switch (sort) {
     case "price-asc":
-      return copy.sort((a, b) => a.price - b.price);
+      return copy.sort((a, b) => a.samplePrice - b.samplePrice);
     case "price-desc":
-      return copy.sort((a, b) => b.price - a.price);
+      return copy.sort((a, b) => b.samplePrice - a.samplePrice);
     case "rating":
-      return copy.sort((a, b) => b.rating - a.rating || b.reviews - a.reviews);
+      return copy.sort((a, b) => (b.sampleRating ?? 0) - (a.sampleRating ?? 0) || (b.sampleReviews ?? 0) - (a.sampleReviews ?? 0));
     case "discount":
       return copy.sort(
-        (a, b) => offPercent(b.price, b.compareAt) - offPercent(a.price, a.compareAt) || a.price - b.price,
+        (a, b) => offPercent(b.samplePrice, b.sampleCompareAt) - offPercent(a.samplePrice, a.sampleCompareAt) || a.samplePrice - b.samplePrice,
       );
     default:
       return copy.sort(
         (a, b) =>
           Number(Boolean(b.featured)) - Number(Boolean(a.featured)) ||
-          offPercent(b.price, b.compareAt) - offPercent(a.price, a.compareAt) ||
-          b.rating - a.rating,
+          offPercent(b.samplePrice, b.sampleCompareAt) - offPercent(a.samplePrice, a.sampleCompareAt) ||
+          (b.sampleRating ?? 0) - (a.sampleRating ?? 0),
       );
   }
 }
 
-export const partnerNames = [...new Set(products.map((product) => product.partner))];
+export const partnerNames = [...new Set(products.map((product) => getRetailer(product.retailerId)?.name ?? product.retailerId))];

@@ -12,10 +12,9 @@ export const Route = createFileRoute("/studio")({
 });
 
 function StudioPage() {
-  const tag = useShop((state) => state.tag);
+  const ownerTag = import.meta.env.VITE_OWNER_AFFILIATE_TAG ?? "juniper";
   const ratePct = useShop((state) => state.ratePct);
   const clicks = useShop((state) => state.clicks);
-  const setTag = useShop((state) => state.setTag);
   const setRatePct = useShop((state) => state.setRatePct);
   const clearClicks = useShop((state) => state.clearClicks);
   const mounted = useMounted();
@@ -28,25 +27,17 @@ function StudioPage() {
       <p className="text-sm font-medium text-forest">Affiliate studio</p>
       <h1 className="mt-2 text-4xl">Your tag, your clicks.</h1>
       <p className="mt-3 max-w-xl text-muted">
-        This is click value, not confirmed earnings. Networks report purchases on their own. Juniper only sees that
-        someone left through your link.
+        These are simulated click estimates only. Verified network earnings are reported by retailers separately and are not shown here. Visitors cannot override Juniper’s affiliate attribution.
       </p>
 
       <div className="mt-8 grid items-start gap-4 lg:grid-cols-[20rem_1fr]">
         <form className="rounded-2xl bg-paper p-4 shadow-border" onSubmit={(event) => event.preventDefault()}>
-          <label className="block text-sm font-medium" htmlFor="tag">
-            Tracking tag
+          <label className="block text-sm font-medium">
+            Owner affiliate tag (fixed)
           </label>
-          <input
-            id="tag"
-            value={tag}
-            onChange={(event) => setTag(event.target.value)}
-            placeholder="juniper-20"
-            spellCheck={false}
-            className="mt-2 h-12 w-full rounded-full border border-line bg-canvas px-4 text-base outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
-          />
+          <p className="mt-2 text-sm font-medium">{ownerTag}</p>
           <p className="mt-2 text-sm text-muted">
-            {tag ? "Links use this tag." : "Empty falls back to juniper-20."} Letters, numbers, and hyphens.
+            Set via VITE_OWNER_AFFILIATE_TAG. Public visitors cannot change attribution.
           </p>
           <label className="mt-5 block text-sm font-medium" htmlFor="rate">
             Commission rate
@@ -82,8 +73,8 @@ function StudioPage() {
 
         <div className="grid gap-3 sm:grid-cols-3">
           <Stat label="Clicks" value={String(clicks.length)} />
-          <Stat label="Est. commission" value={money(commission)} />
-          <Stat label="Avg per click" value={money(average)} />
+          <Stat label="Simulated commission" value={money(commission)} />
+          <Stat label="Avg simulated" value={money(average)} />
         </div>
       </div>
 
