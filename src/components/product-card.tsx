@@ -47,14 +47,14 @@ export function ProductCard({ product }: { product: Product }) {
           <p className="mt-2 text-xs text-muted">Sample data — demonstration only</p>
         )}
         <div className="mt-2">
-          <Price price={product.samplePrice} compareAt={product.sampleCompareAt} />
+          <Price price={product.samplePrice} compareAt={product.sampleCompareAt} illustrative={product.isDemonstration} />
           {product.isDemonstration ? (
             <p className="text-xs text-muted">Illustrative pricing only</p>
           ) : null}
         </div>
         <div className="mt-auto pt-3">
           <ShopLink product={product} className="inline-flex h-11 items-center gap-1 text-sm font-medium text-forest">
-            {product.isDemonstration ? "View demo" : "Shop"}
+            {product.isDemonstration ? "Demo only" : "Shop"}
           </ShopLink>
         </div>
       </div>

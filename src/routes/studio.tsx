@@ -12,7 +12,6 @@ export const Route = createFileRoute("/studio")({
 });
 
 function StudioPage() {
-  const ownerTag = import.meta.env.VITE_OWNER_AFFILIATE_TAG ?? "juniper";
   const ratePct = useShop((state) => state.ratePct);
   const clicks = useShop((state) => state.clicks);
   const setRatePct = useShop((state) => state.setRatePct);
@@ -25,20 +24,14 @@ function StudioPage() {
   return (
     <Page>
       <p className="text-sm font-medium text-forest">Affiliate studio</p>
-      <h1 className="mt-2 text-4xl">Your tag, your clicks.</h1>
+      <h1 className="mt-2 text-4xl">Demonstration analytics</h1>
       <p className="mt-3 max-w-xl text-muted">
-        These are simulated click estimates only. Verified network earnings are reported by retailers separately and are not shown here. Visitors cannot override Juniper’s affiliate attribution.
+        This page is a browser-local simulation, not an owner revenue dashboard. It cannot report real network sales, commissions, or site-wide visitor activity.
       </p>
 
       <div className="mt-8 grid items-start gap-4 lg:grid-cols-[20rem_1fr]">
         <form className="rounded-2xl bg-paper p-4 shadow-border" onSubmit={(event) => event.preventDefault()}>
-          <label className="block text-sm font-medium">
-            Owner affiliate tag (fixed)
-          </label>
-          <p className="mt-2 text-sm font-medium">{ownerTag}</p>
-          <p className="mt-2 text-sm text-muted">
-            Set via VITE_OWNER_AFFILIATE_TAG. Public visitors cannot change attribution.
-          </p>
+          <p className="text-sm font-medium">Owner affiliate attribution is configured by the site operator, not through this public page.</p>
           <label className="mt-5 block text-sm font-medium" htmlFor="rate">
             Commission rate
           </label>
@@ -72,7 +65,7 @@ function StudioPage() {
         </form>
 
         <div className="grid gap-3 sm:grid-cols-3">
-          <Stat label="Clicks" value={String(clicks.length)} />
+          <Stat label="Clicks in this browser" value={String(clicks.length)} />
           <Stat label="Simulated commission" value={money(commission)} />
           <Stat label="Avg simulated" value={money(average)} />
         </div>

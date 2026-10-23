@@ -75,9 +75,11 @@ export type Product = {
   specs: [string, string][];
   /** Sample testimonial for demonstration only. */
   sampleQuote?: { by: string; text: string };
-  /** True for all current catalog items. Not purchasable until verified. */
-  isDemonstration: true;
-  verified: false;
+  /** Product-specific URL, confirmed against the actual retailer listing. */
+  verifiedProductUrl?: string;
+  /** Every current entry is still a demonstration, but future entries may be verified. */
+  isDemonstration: boolean;
+  verified: boolean;
 };
 
 export const products: Product[] = [
@@ -284,17 +286,35 @@ export function getRetailer(id: string) {
 }
 
 /**
- * Builds an affiliate URL only when the retailer is verified and has a base URL.
- * Owner affiliate tag is applied via the retailer's param. Public visitors cannot override it.
- * Returns null for demonstration / unverified products.
+ * Fail closed until the owner has verified BOTH the merchant and the exact product page.
+ * Never send a shopper to an unverified/placeholder destination.
  */
 export function buildAffiliateUrl(product: Product, ownerTag: string): string | null {
-  if (!product.verified || product.isDemonstration) return null;
+  if (!product.verified || product.isDemonstration || !product.verifiedProductUrl) return null;
   const retailer = getRetailer(product.retailerId);
   if (!retailer?.verified || !retailer.verifiedBaseUrl || !retailer.affiliateParam) return null;
-  const url = new URL(retailer.verifiedBaseUrl);
-  url.searchParams.set(retailer.affiliateParam, ownerTag.trim() || "juniper");
-  return url.toString();
+  const tag = ownerTag.trim();
+  if (!tag || !/^[a-zA-Z0-9_-]{1,64}$/.test(tag)) return null;
+  if (!/^[a-zA-Z][a-zA-Z0-9_-]{0,63}$/.test(retailer.affiliateParam)) return null;
+  try {
+    const approved = new URL(retailer.verifiedBaseUrl);
+    const destination = new URL(product.verifiedProductUrl);
+    if (
+      approved.protocol !== "https:" ||
+      destination.protocol !== "https:" ||
+      !approved.hostname ||
+      destination.hostname !== approved.hostname ||
+      destination.username ||
+      destination.password ||
+      approved.username ||
+      approved.password
+    ) return null;
+    // Exact-host requirement is intentional; retailer shortlinks require separate verification.
+    destination.searchParams.set(retailer.affiliateParam, tag);
+    return destination.toString();
+  } catch {
+    return null;
+  }
 }
 
 export function inDepartment(slug: string) {

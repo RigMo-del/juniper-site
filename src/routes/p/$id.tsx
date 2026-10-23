@@ -14,7 +14,7 @@ import { ShopLink } from "@/components/shop-link";
 import { Stars } from "@/components/stars";
 import { EmptyState, Page } from "@/components/states";
 
-const OWNER_AFFILIATE_TAG = import.meta.env.VITE_OWNER_AFFILIATE_TAG ?? "juniper";
+const OWNER_AFFILIATE_TAG = import.meta.env.VITE_OWNER_AFFILIATE_TAG?.trim() ?? "";
 
 export const Route = createFileRoute("/p/$id")({
   head: ({ params }) => {
@@ -87,7 +87,7 @@ function ProductPage() {
               <p className="mt-3 text-sm text-muted">Sample rating data for demonstration only.</p>
             )}
             <div className="mt-4">
-              <Price price={product.samplePrice} compareAt={product.sampleCompareAt} size="lg" />
+              <Price price={product.samplePrice} compareAt={product.sampleCompareAt} size="lg" illustrative={product.isDemonstration} />
               {product.isDemonstration ? (
                 <p className="text-sm text-muted">Illustrative pricing — not a real offer.</p>
               ) : null}

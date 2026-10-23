@@ -8,7 +8,7 @@ import { useShop } from "@/lib/shop-store";
 import { AffiliateDisclosure } from "@/components/affiliate-disclosure";
 
 /** Fixed owner affiliate tag. Public visitors cannot override this. */
-const OWNER_AFFILIATE_TAG = import.meta.env.VITE_OWNER_AFFILIATE_TAG ?? "juniper";
+const OWNER_AFFILIATE_TAG = import.meta.env.VITE_OWNER_AFFILIATE_TAG?.trim() ?? "";
 
 export function ShopLink({
   product,
@@ -34,7 +34,7 @@ export function ShopLink({
           className={`${className ?? `${btnPrimary} w-full`} opacity-60 cursor-not-allowed`}
           aria-disabled="true"
         >
-          {children ?? "Demonstration only"}
+          {"Demo only — shopping unavailable"}
         </button>
         <AffiliateDisclosure />
         <p className="text-xs text-muted">
