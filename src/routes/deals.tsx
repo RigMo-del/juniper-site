@@ -14,7 +14,7 @@ function DealsPage() {
     <Page>
       <h1 className="text-4xl">Markdowns</h1>
       <p className="mt-2 max-w-xl text-muted">
-        Pieces with a higher sample price crossed out. The partner still sets the real number at checkout.
+        Demonstration items with illustrative sample discounts. Not real offers. Products are not purchasable until verified.
       </p>
       <div className="mt-6">
         <ProductGrid products={items} />
