@@ -7,8 +7,14 @@ import { btnPrimary } from "@/lib/ui";
 import { useShop } from "@/lib/shop-store";
 import { AffiliateDisclosure } from "@/components/affiliate-disclosure";
 
-/** Amazon Associates tracking ID for Juniper. Configurable via hosting environment (VITE_OWNER_AFFILIATE_TAG). */
-const OWNER_AFFILIATE_TAG = import.meta.env.VITE_OWNER_AFFILIATE_TAG?.trim() || "juniperfinds6-20";
+/** Amazon Associates tracking ID for Juniper.
+ *  Configurable via VITE_OWNER_AFFILIATE_TAG. Defaults to the approved Juniper ID.
+ *  Invalid (non-matching) values fall back to the approved ID so a bad env
+ *  cannot produce a broken or foreign tracking tag. Empty/unset also uses the approved ID.
+ */
+const APPROVED_JUNIPER_TAG = "juniperfinds6-20";
+const rawTag = import.meta.env.VITE_OWNER_AFFILIATE_TAG?.trim() ?? "";
+const OWNER_AFFILIATE_TAG = /^[a-zA-Z0-9_-]{1,64}$/.test(rawTag) ? rawTag : APPROVED_JUNIPER_TAG;
 
 export function ShopLink({
   product,
