@@ -294,7 +294,9 @@ export function buildAffiliateUrl(product: Product, ownerTag: string): string | 
   const retailer = getRetailer(product.retailerId);
   if (!retailer?.verified || !retailer.verifiedBaseUrl || !retailer.affiliateParam) return null;
   const tag = ownerTag.trim();
-  if (!tag || !/^[a-zA-Z0-9_-]{1,64}$/.test(tag)) return null;
+  // Only Juniper's approved Amazon Associates ID is permitted.
+  // Any other value (including other correctly formatted tags) is rejected.
+  if (tag !== "juniperfinds6-20") return null;
   if (!/^[a-zA-Z][a-zA-Z0-9_-]{0,63}$/.test(retailer.affiliateParam)) return null;
   try {
     const approved = new URL(retailer.verifiedBaseUrl);

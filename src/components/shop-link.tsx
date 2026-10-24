@@ -8,13 +8,14 @@ import { useShop } from "@/lib/shop-store";
 import { AffiliateDisclosure } from "@/components/affiliate-disclosure";
 
 /** Amazon Associates tracking ID for Juniper.
- *  Configurable via VITE_OWNER_AFFILIATE_TAG. Defaults to the approved Juniper ID.
- *  Invalid (non-matching) values fall back to the approved ID so a bad env
- *  cannot produce a broken or foreign tracking tag. Empty/unset also uses the approved ID.
+ *  Only the approved ID "juniperfinds6-20" is accepted.
+ *  Unset or empty env uses the approved ID.
+ *  Any other value (including other correctly formatted IDs) is rejected;
+ *  the system never silently substitutes a different affiliate ID.
  */
 const APPROVED_JUNIPER_TAG = "juniperfinds6-20";
 const rawTag = import.meta.env.VITE_OWNER_AFFILIATE_TAG?.trim() ?? "";
-const OWNER_AFFILIATE_TAG = /^[a-zA-Z0-9_-]{1,64}$/.test(rawTag) ? rawTag : APPROVED_JUNIPER_TAG;
+const OWNER_AFFILIATE_TAG = rawTag === "" || rawTag === APPROVED_JUNIPER_TAG ? APPROVED_JUNIPER_TAG : null;
 
 export function ShopLink({
   product,
@@ -27,7 +28,7 @@ export function ShopLink({
 }) {
   const ratePct = useShop((state) => state.ratePct);
   const track = useShop((state) => state.track);
-  const href = buildAffiliateUrl(product, OWNER_AFFILIATE_TAG);
+  const href = OWNER_AFFILIATE_TAG ? buildAffiliateUrl(product, OWNER_AFFILIATE_TAG) : null;
   const retailer = getRetailer(product.retailerId);
   const isDemo = product.isDemonstration || !product.verified || !href;
 

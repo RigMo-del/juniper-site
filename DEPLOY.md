@@ -61,7 +61,7 @@ The project is configured for Netlify using the official `@netlify/vite-plugin-t
 2. Set the build command to `npm run build` (or rely on `netlify.toml`).
 3. Set the publish directory to `dist/client` (or rely on `netlify.toml`).
 4. In Site settings → Environment variables, set:
-   - `VITE_OWNER_AFFILIATE_TAG=juniperfinds6-20` (optional; code defaults to this approved Juniper ID when unset or invalid)
+   - `VITE_OWNER_AFFILIATE_TAG=juniperfinds6-20` (optional; unset/empty uses the approved Juniper ID. Any other value is rejected and produces no affiliate links — the system never substitutes a different ID.)
    - `VITE_AUTH_ENABLED=false`
    - Any other values from `.env.example` as needed.
 5. Deploy. SSR, product pages, images, and PWA middleware (via Nitro `serverDir`) are preserved.
