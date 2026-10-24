@@ -189,8 +189,8 @@ function Footer() {
         <div className="sm:col-span-2">
           <p className="font-display text-2xl">Juniper</p>
           <p className="mt-2 max-w-md text-sm text-muted">
-            Juniper may earn a commission when someone buys through a partner link. Prices, ratings, and partners
-            here are a sample catalog so you can try the aisle. Shoppers pay the partner, never Juniper.
+            As an Amazon Associate I earn from qualifying purchases. Juniper may earn a commission when someone buys through a partner link. Prices, ratings, and partners
+            here are a sample catalog so you can try the aisle. Shoppers pay the partner, never Juniper. Demonstration products are not purchasable.
           </p>
         </div>
         <div>

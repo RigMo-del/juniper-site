@@ -7,8 +7,8 @@ import { btnPrimary } from "@/lib/ui";
 import { useShop } from "@/lib/shop-store";
 import { AffiliateDisclosure } from "@/components/affiliate-disclosure";
 
-/** Fixed owner affiliate tag. Public visitors cannot override this. */
-const OWNER_AFFILIATE_TAG = import.meta.env.VITE_OWNER_AFFILIATE_TAG?.trim() ?? "";
+/** Amazon Associates tracking ID for Juniper. Configurable via hosting environment (VITE_OWNER_AFFILIATE_TAG). */
+const OWNER_AFFILIATE_TAG = import.meta.env.VITE_OWNER_AFFILIATE_TAG?.trim() || "juniperfinds6-20";
 
 export function ShopLink({
   product,

@@ -1,7 +1,7 @@
 export function AffiliateDisclosure() {
   return (
     <p className="text-xs text-muted">
-      Juniper may earn a commission when you buy through a qualifying retailer link, at no additional cost to you. Demo products have no active shopping links.{" "}
+      As an Amazon Associate I earn from qualifying purchases. Juniper may earn a commission when you buy through a qualifying retailer link, at no additional cost to you. Demo products have no active shopping links.{" "}
       <a href="/privacy" className="underline">
         Privacy
       </a>{" "}
