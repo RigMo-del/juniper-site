@@ -15,7 +15,7 @@ local `.env` file (see `.env.example`). Do not commit `.env`.
 - Styles: `src/styles.css` (Tailwind CSS v4)
 - Images and public files: `public/` (product photos, favicon, share card)
 - Dependencies: `package.json` and `package-lock.json`
-- Config: `vite.config.ts`, `tsconfig.json`, `eslint.config.mjs`, `.prettierrc`, `vercel.json`
+- Config: `vite.config.ts`, `tsconfig.json`, `eslint.config.mjs`, `.prettierrc`, `netlify.toml`
 - Server helpers, scripts, and SQL migrations
 
 `node_modules/` is not included. Install it with `npm install`.
@@ -53,15 +53,17 @@ Stop the server with Ctrl+C.
 `.grok/app-env.json` sets `VITE_AUTH_ENABLED` to false so the shop stays open
 without a login.
 
-## Deploy
+## Deploy to Netlify
 
-The project is set up for Vercel (`vercel.json`). From the project folder,
-after `npm install`:
+The project is configured for Netlify using the official `@netlify/vite-plugin-tanstack-start`.
 
-```bash
-npm run build
-```
+1. Connect the GitHub repository to a Netlify site.
+2. Set the build command to `npm run build` (or rely on `netlify.toml`).
+3. Set the publish directory to `dist/client` (or rely on `netlify.toml`).
+4. In Site settings → Environment variables, set:
+   - `VITE_OWNER_AFFILIATE_TAG=juniperfinds6-20` (or leave unset; code defaults to this for Juniper)
+   - `VITE_AUTH_ENABLED=false`
+   - Any other secrets from `.env.example` as needed.
+5. Deploy. SSR, product pages, images, and PWA middleware (via Nitro `serverDir`) are preserved.
 
-Then connect the GitHub repo to a new Vercel project and deploy. Set any
-environment variables yourself in the host dashboard. Do not put secrets in
-the repository.
+Do not deploy or consume credits without explicit approval. Demonstration products remain non-purchasable.

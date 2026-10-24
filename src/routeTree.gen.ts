@@ -12,9 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as DealsRouteImport } from './routes/deals'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SavedRouteImport } from './routes/saved'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as StudioRouteImport } from './routes/studio'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as CSlugRouteImport } from './routes/c/$slug'
 import { Route as PIdRouteImport } from './routes/p/$id'
 
@@ -33,6 +35,11 @@ const DealsRoute = DealsRouteImport.update({
   path: '/deals',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SavedRoute = SavedRouteImport.update({
   id: '/saved',
   path: '/saved',
@@ -46,6 +53,11 @@ const SearchRoute = SearchRouteImport.update({
 const StudioRoute = StudioRouteImport.update({
   id: '/studio',
   path: '/studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CSlugRoute = CSlugRouteImport.update({
@@ -63,9 +75,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/deals': typeof DealsRoute
+  '/privacy': typeof PrivacyRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
   '/studio': typeof StudioRoute
+  '/terms': typeof TermsRoute
   '/c/$slug': typeof CSlugRoute
   '/p/$id': typeof PIdRoute
 }
@@ -73,9 +87,11 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/deals': typeof DealsRoute
+  '/privacy': typeof PrivacyRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
   '/studio': typeof StudioRoute
+  '/terms': typeof TermsRoute
   '/c/$slug': typeof CSlugRoute
   '/p/$id': typeof PIdRoute
 }
@@ -84,9 +100,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
   '/deals': typeof DealsRoute
+  '/privacy': typeof PrivacyRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
   '/studio': typeof StudioRoute
+  '/terms': typeof TermsRoute
   '/c/$slug': typeof CSlugRoute
   '/p/$id': typeof PIdRoute
 }
@@ -96,9 +114,11 @@ export interface FileRouteTypes {
     | '/'
     | '/cart'
     | '/deals'
+    | '/privacy'
     | '/saved'
     | '/search'
     | '/studio'
+    | '/terms'
     | '/c/$slug'
     | '/p/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -106,9 +126,11 @@ export interface FileRouteTypes {
     | '/'
     | '/cart'
     | '/deals'
+    | '/privacy'
     | '/saved'
     | '/search'
     | '/studio'
+    | '/terms'
     | '/c/$slug'
     | '/p/$id'
   id:
@@ -116,9 +138,11 @@ export interface FileRouteTypes {
     | '/'
     | '/cart'
     | '/deals'
+    | '/privacy'
     | '/saved'
     | '/search'
     | '/studio'
+    | '/terms'
     | '/c/$slug'
     | '/p/$id'
   fileRoutesById: FileRoutesById
@@ -127,9 +151,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CartRoute: typeof CartRoute
   DealsRoute: typeof DealsRoute
+  PrivacyRoute: typeof PrivacyRoute
   SavedRoute: typeof SavedRoute
   SearchRoute: typeof SearchRoute
   StudioRoute: typeof StudioRoute
+  TermsRoute: typeof TermsRoute
   CSlugRoute: typeof CSlugRoute
   PIdRoute: typeof PIdRoute
 }
@@ -157,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DealsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/saved': {
       id: '/saved'
       path: '/saved'
@@ -176,6 +209,13 @@ declare module '@tanstack/react-router' {
       path: '/studio'
       fullPath: '/studio'
       preLoaderRoute: typeof StudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/c/$slug': {
@@ -199,9 +239,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CartRoute: CartRoute,
   DealsRoute: DealsRoute,
+  PrivacyRoute: PrivacyRoute,
   SavedRoute: SavedRoute,
   SearchRoute: SearchRoute,
   StudioRoute: StudioRoute,
+  TermsRoute: TermsRoute,
   CSlugRoute: CSlugRoute,
   PIdRoute: PIdRoute,
 }

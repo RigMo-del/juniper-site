@@ -21,9 +21,9 @@ export function Shell({ children }: { children: ReactNode }) {
       </a>
       <div className="bg-forest text-paper">
         <div className={`${wrap} flex items-center justify-between gap-3 py-2`}>
-          <p className="text-sm">Partner links carry your tag.</p>
-          <Link to="/studio" className="inline-flex h-11 shrink-0 items-center rounded-full bg-paper/15 px-3 text-sm">
-            Edit tag
+          <p className="text-sm">Curated finds · Demo products clearly labeled</p>
+          <Link to="/privacy" className="inline-flex h-11 shrink-0 items-center rounded-full bg-paper/15 px-3 text-sm">
+            Privacy details
           </Link>
         </div>
       </div>
@@ -72,16 +72,9 @@ function Utility() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const saved = useShop((state) => state.saved.length);
   const count = useShop((state) => state.cart.reduce((sum, line) => sum + line.qty, 0));
-  const tag = useShop((state) => state.tag);
 
   return (
     <div className="ml-auto flex items-center">
-      <Link
-        to="/studio"
-        className="mr-1 hidden h-11 max-w-36 items-center truncate rounded-full bg-foam px-3 text-sm text-forest md:inline-flex"
-      >
-        {tag || "set tag"}
-      </Link>
       <Link
         to="/saved"
         aria-current={pathname === "/saved" ? "page" : undefined}
@@ -108,7 +101,6 @@ function DeptLinks() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const links = [
     { to: "/deals" as const, label: "Markdowns", active: pathname === "/deals" },
-    { to: "/studio" as const, label: "Studio", active: pathname === "/studio" },
   ];
 
   return (
@@ -197,8 +189,8 @@ function Footer() {
         <div className="sm:col-span-2">
           <p className="font-display text-2xl">Juniper</p>
           <p className="mt-2 max-w-md text-sm text-muted">
-            Juniper may earn a commission when someone buys through a partner link. Prices, ratings, and partners
-            here are a sample catalog so you can try the aisle. Shoppers pay the partner, never Juniper.
+            As an Amazon Associate I earn from qualifying purchases. Juniper may earn a commission when someone buys through a partner link. Prices, ratings, and partners
+            here are a sample catalog so you can try the aisle. Shoppers pay the partner, never Juniper. Demonstration products are not purchasable.
           </p>
         </div>
         <div>
@@ -232,8 +224,8 @@ function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/studio" className="hover:text-ink">
-                Studio
+              <Link to="/privacy" className="hover:text-ink">
+                Privacy
               </Link>
             </li>
           </ul>

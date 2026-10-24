@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { departments, getProduct, inDepartment, listProducts, products, partnerNames } from "@/lib/catalog";
 import { money } from "@/lib/format";
 import { useShop } from "@/lib/shop-store";
-import { btnGhost, btnPrimary } from "@/lib/ui";
+import { btnPrimary } from "@/lib/ui";
 import { ProductCard, ProductGrid } from "@/components/product-card";
 import { ProductPhoto } from "@/components/product-photo";
 import { Page } from "@/components/states";
@@ -23,21 +23,17 @@ function Home() {
       <section className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
         <div>
           <p className="text-sm font-medium text-forest">Affiliate storefront</p>
-          <h1 className="mt-3 text-4xl leading-[1.08] sm:text-6xl">Shop the edit. Earn on the way out.</h1>
+          <h1 className="mt-3 text-4xl leading-[1.08] sm:text-6xl">Thoughtful finds, without the noise.</h1>
           <p className="mt-4 max-w-md text-lg text-muted">
-            A curated aisle of partner goods. Paste your tracking tag once. Every shop link carries it, and Studio
-            turns the click into an estimated commission.
+            Explore a curated preview of useful products. Listings are demonstration-only until we verify each retailer, product, and shopping link.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link to="/deals" className={btnPrimary}>
-              Shop markdowns
-            </Link>
-            <Link to="/studio" className={btnGhost}>
-              Open Studio
+              Explore the preview
             </Link>
           </div>
           <p className="mt-4 text-sm text-muted">
-            {products.length} pieces · {partnerNames.length} partners · checkout happens on their site
+            {products.length} demonstration pieces · {partnerNames.length} sample partners · no purchases available yet
           </p>
         </div>
         <div>
@@ -56,7 +52,7 @@ function Home() {
               <span>
                 <span className="block text-sm text-muted">From the table</span>
                 <span className="block font-medium">{kettle.name}</span>
-                <span className="block text-sm tabular-nums">{money(kettle.price)}</span>
+                <span className="block text-sm tabular-nums">Sample: {money(kettle.samplePrice)}</span>
               </span>
             </Link>
           ) : null}
@@ -66,26 +62,26 @@ function Home() {
       <ol className="mt-12 grid gap-6 border-y border-line py-8 sm:grid-cols-3">
         <li>
           <p className="font-display text-2xl">01</p>
-          <h2 className="mt-2 font-sans text-base font-medium tracking-normal">Paste a tag</h2>
-          <p className="mt-1 text-sm text-muted">Any partner ID. It stays in this browser and rides on every outbound link.</p>
+          <h2 className="mt-2 font-sans text-base font-medium tracking-normal">Explore</h2>
+          <p className="mt-1 text-sm text-muted">Browse preview products and save your favorites.</p>
         </li>
         <li>
           <p className="font-display text-2xl">02</p>
-          <h2 className="mt-2 font-sans text-base font-medium tracking-normal">Share or shop</h2>
-          <p className="mt-1 text-sm text-muted">Send a product link, or open the partner yourself. Both count as a click.</p>
+          <h2 className="mt-2 font-sans text-base font-medium tracking-normal">Know what is verified</h2>
+          <p className="mt-1 text-sm text-muted">No shopping links are active until the exact product and retailer have been verified.</p>
         </li>
         <li>
           <p className="font-display text-2xl">03</p>
-          <h2 className="mt-2 font-sans text-base font-medium tracking-normal">Read Studio</h2>
-          <p className="mt-1 text-sm text-muted">Clicks and estimated commission. Purchases still post in your network, not here.</p>
+          <h2 className="mt-2 font-sans text-base font-medium tracking-normal">Shop later</h2>
+          <p className="mt-1 text-sm text-muted">Once products are verified, purchases will happen on the retailer’s website.</p>
         </li>
       </ol>
 
       <section className="mt-12">
         <div className="mb-4 flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-3xl">Markdowns</h2>
-            <p className="text-sm text-muted">Sample prices, marked down so the aisle has a pulse.</p>
+            <h2 className="text-3xl">Sample picks</h2>
+            <p className="text-sm text-muted">Illustrative prices only — no real sale offers.</p>
           </div>
           <Link to="/deals" className="shrink-0 text-sm font-medium text-forest">
             See all
